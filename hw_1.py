@@ -125,7 +125,7 @@ def create_dag(dag_id: str, model_key: Literal["random_forest", "linear_regressi
         end_time = datetime.now().strftime("%A, %D, %H:%M")
         logger.info(f"Предобработка данных завершена")
 
-        return {"preprocess_start_time": start_time, "preprocess_end_time": end_time, "features": FEATURES, "target": target_column}
+        return {"preprocess_start_time": start_time, "preprocess_end_time": end_time, "features": FEATURES, "target": TARGET}
 
     def train_model(**kwargs) -> Dict[str, Any]:
         start_time = datetime.now().strftime("%A, %D, %H:%M")
