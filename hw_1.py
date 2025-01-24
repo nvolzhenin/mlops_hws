@@ -97,7 +97,6 @@ def create_dag(dag_id: str, model_key: Literal["random_forest", "linear_regressi
         data = pd.read_pickle(file)
 
 
-        target_column = 'MedHouseVal'
 
         X = data[FEATURES]
         y = data[TARGET]
@@ -123,7 +122,6 @@ def create_dag(dag_id: str, model_key: Literal["random_forest", "linear_regressi
                 replace=True,
             )
 
-        # Логирование завершения предобработки
         end_time = datetime.now().strftime("%A, %D, %H:%M")
         logger.info(f"Предобработка данных завершена")
 
@@ -145,13 +143,11 @@ def create_dag(dag_id: str, model_key: Literal["random_forest", "linear_regressi
         model.fit(data["X_train"], data["y_train"])
         predictions = model.predict(data["X_test"])
 
-        # Оценка модели
         metrics = {
             "r2_score": r2_score(data["y_test"], predictions),
             "mae": median_absolute_error(data["y_test"], predictions),
         }
 
-        # Логирование метрик
         end_time = datetime.now().strftime("%A, %D, %H:%M")
         logger.info("Обучение завершено")
 
